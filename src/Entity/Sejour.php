@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Repository\SejourRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=SejourRepository::class)
  */
+#[ApiResource]
 class Sejour
 {
     /**

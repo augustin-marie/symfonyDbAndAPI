@@ -6,10 +6,12 @@ use App\Repository\EmployerRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=EmployerRepository::class)
  */
+#[ApiResource]
 class Employer implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**

@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Repository\LitRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=LitRepository::class)
  */
+#[ApiResource]
 class Lit
 {
     /**
