@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EmployerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -67,6 +69,16 @@ class Employer implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_service;
+
+    /**
+     * @ORM\OneToMany(targetEntity=RendezVous::class, mappedBy="id_employer")
+     */
+    private $rendezVouses;
+
+    public function __construct()
+    {
+        $this->rendezVouses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -225,6 +237,36 @@ class Employer implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIdService(?Service $id_service): self
     {
         $this->id_service = $id_service;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RendezVous>
+     */
+    public function getRendezVouses(): Collection
+    {
+        return $this->rendezVouses;
+    }
+
+    public function addRendezVouse(RendezVous $rendezVouse): self
+    {
+        if (!$this->rendezVouses->contains($rendezVouse)) {
+            $this->rendezVouses[] = $rendezVouse;
+            $rendezVouse->setIdEmployer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRendezVouse(RendezVous $rendezVouse): self
+    {
+        if ($this->rendezVouses->removeElement($rendezVouse)) {
+            // set the owning side to null (unless already changed)
+            if ($rendezVouse->getIdEmployer() === $this) {
+                $rendezVouse->setIdEmployer(null);
+            }
+        }
 
         return $this;
     }
