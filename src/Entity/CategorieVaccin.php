@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Repository\CategorieVaccinRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -22,11 +23,13 @@ class CategorieVaccin
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
+    #[Groups('detail_cat')]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
+    #[Groups('detail_cat')]
     private $nom_vaccin;
 
     /**

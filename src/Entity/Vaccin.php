@@ -3,13 +3,14 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Repository\VaccinRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=VaccinRepository::class)
  */
-#[ApiResource]
+#[ApiResource(normalizationContext: ['groups' => ['detail_cat']])]
 class Vaccin
 {
     /**
@@ -44,6 +45,7 @@ class Vaccin
      * @ORM\ManyToOne(targetEntity=CategorieVaccin::class, inversedBy="vaccins")
      * @ORM\JoinColumn(nullable=false)
      */
+    #[Groups('detail_cat')]
     private $id_cat;
 
     public function getId(): ?int
