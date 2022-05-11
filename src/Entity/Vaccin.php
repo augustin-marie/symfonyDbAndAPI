@@ -24,11 +24,13 @@ class Vaccin
      * @ORM\Column(type="integer")
      * 
      */
+    #[Groups('detail_cat')]
     private $num_lot;
 
     /**
      * @ORM\Column(type="date")
      */
+    #[Groups('detail_cat')]
     private $date_peremtion;
 
     /**
@@ -39,6 +41,7 @@ class Vaccin
     /**
      * @ORM\Column(type="integer")
      */
+    #[Groups('detail_cat')]
     private $restant;
 
     /**
