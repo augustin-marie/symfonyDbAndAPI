@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=EmployerRepository::class)
@@ -21,6 +22,7 @@ class Employer implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
+    #[Groups('appointment_group')]
     private $id;
 
     /**
@@ -52,11 +54,13 @@ class Employer implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
+    #[Groups('appointment_group')]
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
+    #[Groups('appointment_group')]
     private $prenom;
 
     /**

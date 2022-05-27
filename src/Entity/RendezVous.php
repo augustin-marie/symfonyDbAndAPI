@@ -3,13 +3,14 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Repository\RendezVousRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=RendezVousRepository::class)
  */
-#[ApiResource]
+#[ApiResource(normalizationContext: ['groups' => ['appointment_group']])]
 class RendezVous
 {
     /**
@@ -17,34 +18,45 @@ class RendezVous
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
+    #[Groups('appointment_group')]
     private $id;
 
     /**
      * @ORM\Column(type="date")
      */
+    
+    #[Groups('appointment_group')]
     private $date_rdv;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="boolean")
      */
+    
+    #[Groups('appointment_group')]
     private $Annule;
 
     /**
      * @ORM\ManyToOne(targetEntity=Employer::class, inversedBy="rendezVouses")
      * @ORM\JoinColumn(nullable=false)
      */
+    
+    #[Groups('appointment_group')]
     private $id_employer;
 
     /**
      * @ORM\ManyToOne(targetEntity=Patient::class, inversedBy="rendezVouses")
      * @ORM\JoinColumn(nullable=false)
      */
+    
+    #[Groups('appointment_group')]
     private $id_patient;
 
     /**
      * @ORM\ManyToOne(targetEntity=Vaccin::class)
      * @ORM\JoinColumn(nullable=false)
      */
+    
+    #[Groups('appointment_group')]
     private $num_lot;
 
     public function getId(): ?int
@@ -64,12 +76,12 @@ class RendezVous
         return $this;
     }
 
-    public function getAnnule(): ?\DateTimeInterface
+    public function getAnnule(): ?bool
     {
         return $this->Annule;
     }
 
-    public function setAnnule(\DateTimeInterface $Annule): self
+    public function setAnnule(bool $Annule): self
     {
         $this->Annule = $Annule;
 
